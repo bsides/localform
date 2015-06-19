@@ -3,8 +3,6 @@
     <h1>Confirme sua cidade</h1>
     <p class="lead">
       Por favor, preencha com o nome da sua cidade no campo abaixo
-      <br>
-      Seu IP é <span class="">{{theIP.ip}}</span>
     </p>
     <!-- <p><a class="btn btn-lg btn-success" ng-href="#">Ok!</a></p> -->
   </div>

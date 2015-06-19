@@ -1,9 +1,13 @@
 ### global Firebase ###
 
 'use strict'
-angular.module('localform').controller 'MainCtrl', ($scope, $firebase) ->
+angular.module('localform').controller 'MainCtrl', ($scope, $firebase, $http) ->
   # now we can use $firebase to synchronize data between clients and the server!
   ref = new Firebase('https://localform.firebaseio.com/')
+  # $scope.theIP = window.theIP;
+
+  $scope.theIP = $http.get('/function')
+
   sync = $firebase(ref)
   $scope.awesomeThings = [
     {
