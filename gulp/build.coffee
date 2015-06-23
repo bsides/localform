@@ -5,6 +5,9 @@ $ = require('gulp-load-plugins')(pattern: [
   'main-bower-files'
   'uglify-save-license'
 ])
+
+sourcemaps = require('gulp-sourcemaps')
+
 gulp.task 'styles', ->
   gulp.src('app/styles/main.scss').pipe($.plumber()).pipe($.sass(
     errLogToConsole: false
@@ -13,10 +16,15 @@ gulp.task 'styles', ->
   )).pipe($.autoprefixer('last 1 version')).pipe(gulp.dest('.tmp/styles')).pipe $.size()
 gulp.task 'coffeescripts', ->
   gulp.src('app/scripts/**/*.coffee')
-    .pipe($.coffee())
+    .pipe(sourcemaps.init())
+    .pipe($.coffee(bare: true)).on('error', -> $.util.log).on('error', -> gutil.log)
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/scripts'))
 gulp.task 'scripts', ->
-  gulp.src('app/scripts/**/*.js').pipe($.jshint()).pipe($.jshint.reporter('jshint-stylish')).pipe $.size()
+  gulp.src('app/scripts/**/*.js')
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe $.size()
 gulp.task 'partials', ->
   gulp.src('app/partials/**/*.html').pipe($.minifyHtml(
     empty: true

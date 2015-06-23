@@ -5,7 +5,7 @@ gulp.task 'watch', [
   'styles'
 ], ->
   gulp.watch 'app/styles/**/*.scss', [ 'styles' ]
-  gulp.watch 'app/scripts/**/*.coffee', [ 'scripts' ]
+  gulp.watch 'app/scripts/**/*.coffee', [ 'coffeescripts' ]
   gulp.watch 'app/scripts/**/*.js', [ 'scripts' ]
   gulp.watch 'app/images/**/*', [ 'images' ]
   gulp.watch 'bower.json', [ 'wiredep' ]

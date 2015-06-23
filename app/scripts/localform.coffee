@@ -8,6 +8,7 @@ angular.module('localform', [
   'firebase'
   'ngResource'
   'ngRoute'
+  'vcRecaptcha'
 ]).config ($routeProvider) ->
   $routeProvider.when('/',
     templateUrl: 'partials/form.html'

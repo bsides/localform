@@ -2,53 +2,96 @@
   <div class="jumbotron text-center">
     <h1>Confirme sua cidade</h1>
     <p class="lead">
-      Por favor, preencha com o nome da sua cidade no campo abaixo
-      <br>
-      Seu IP é <span class="">{{theIP.ip}}</span>
     </p>
-    <!-- <p><a class="btn btn-lg btn-success" ng-href="#">Ok!</a></p> -->
   </div>
 
   <div class="row">
-    <div class="col-md-offset-3 col-md-6">
-    <div class="panel-body">
+    <div class="col-md-offset-4 col-md-5">
+      <p>
+        Por favor, verifique se os dados estão corretos e confirme no botão que segue. Caso não estejam, use os campos abaixo para digitar a informação correta.
+      </p>
+<!--       <p>
+        Seu IP é <span class="">{{ visitor.ip }}</span>
+        <br>
+        Cidade: <span class="">{{ visitor.city }}</span> <small>no estado de <span class="">{{ visitor.region }}</span></small>
+      </p> -->
+    </div>
+  </div>
+  <div class="row">
 
-      <form class="form-horizontal">
-        <div class="form-group form-group-lg">
-          <label for="inputCidade" class="col-sm-2 control-label">Cidade</label>
+    <form class="form-horizontal" name="registerLocalForm" role="form" ng-submit="register()" novalidate>
+
+    <div class="col-md-offset-4 col-md-5" ng-show="showoptions" style="margin-bottom:20px;">
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked ng-click="showform=false" ng-disabled="option2">
+          <p>
+            Seu IP é <span class="">{{ visitor.ip }}</span>
+            <br>
+            Cidade: <span class="">{{ visitor.city }}</span> <small>no estado de <span class="">{{ visitor.region }}</span></small>
+          </p>
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" ng-click="showform=true;" ng-model="option2">
+          Não sei / Não está certo / Quero digitar a informação
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-offset-3 col-md-6">
+      <div ng-show="showform">
+
+        <div class="form-group form-group-lg" ng-class="{ 'has-error' : registerLocalForm.inputIP.$invalid && !registerLocalForm.inputIP.$pristine }">
+          <label for="inputIP" class="col-sm-2 control-label">IP</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputCidade" placeholder="">
-            <span class="help-block">O nome da cidade que você está agora</span>
+            <input type="text" class="form-control" id="inputIP" name="inputIP" placeholder="" ng-model="visitor.ip">
+            <span class="help-block">Por favor, digite o seu IP. Se não souber, copie e cole os números que aparecer <a href="https://api.ipify.org/" target="_blank" title="Seu IP no Ipify"><i class="glyphicon glyphicon-new-window"></i> nesse link</a> <small class="sr-only">(abre em outra aba)</small></span>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-group-lg" ng-class="{ 'has-error' : registerLocalForm.inputCidade.$invalid && !registerLocalForm.inputCidade.$pristine }">
+          <label for="inputCidade" class="col-sm-2 control-label">Cidade</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputCidade" name="inputCidade" placeholder="" ng-model="visitor.city">
+            <span class="help-block">Por favor, digite o nome da cidade que você está agora</span>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : registerLocalForm.inputCEP.$invalid && !registerLocalForm.inputCEP.$pristine }">
           <label for="inputCEP" class="col-sm-2 control-label">CEP</label>
           <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputCEP" placeholder="">
+            <input type="text" class="form-control" id="inputCEP" name="inputCEP" ng-model="visitor.CEP" placeholder="">
             <span class="help-block">Confirme com seu CEP. Se não souber ou não quiser informar, não precisa preencher</span>
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Manda ver!</button>
-          </div>
-        </div>
-      </form>
       </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <div
+            vc-recaptcha
+            theme="'light'"
+            key="model.key"
+            on-create="setWidgetId(widgetId)"
+            on-success="setResponse(response)"
+          ></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" ng-hide="hidesubmit" ng-disabled="registerLocalForm.$invalid">Manda ver!</button>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="alert alert-success" ng-show="showdialog">
+      <button type="button" class="close" ng-click="showdialog=false; hidesubmit=false" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>Obrigado!</strong>
     </div>
+
   </div>
 
-<!--   <div class="row">
-    <div class="col-sm-6 col-md-4" ng-repeat="awesomeThing in awesomeThings | orderBy:'rank'">
-      <div class="thumbnail">
-        <img class="pull-right" ng-src="images/{{awesomeThing.logo}}" alt="{{awesomeThing.title}}">
-        <div class="caption">
-          <h3>{{awesomeThing.title}}</h3>
-          <p>{{awesomeThing.description}}</p>
-          <p><a ng-href="{{awesomeThing.url}}">{{awesomeThing.url}}</a></p>
-        </div>
-      </div>
-    </div>
-  </div> -->
 </div>

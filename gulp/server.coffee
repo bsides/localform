@@ -36,6 +36,7 @@ gulp.task 'serve', [ 'watch' ], ->
     'app/*.html'
     '.tmp/styles/**/*.css'
     '.tmp/scripts/**/*.js'
+    'app/scripts/**/*.coffee'
     'app/scripts/**/*.js'
     'app/partials/**/*.html'
     'app/images/**/*'
