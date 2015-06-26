@@ -15,7 +15,8 @@
     "firebase": "1.0.x",
     "angularfire": "0.8.x",
     "angular-re-captcha": "~0.2.0",
-    "angular-recaptcha": "~2.2.4"
+    "angular-recaptcha": "~2.2.4",
+    "semantic-ui": "next"
   },
   "devDependencies": {
     "angular-mocks": "1.2.x"
